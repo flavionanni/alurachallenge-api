@@ -17,11 +17,7 @@ class Table {
                 console.log('Tabela criada com sucesso');
 
             }
-
-        })
-
+        });
     }
-
 }
-
 module.exports = new Table();
