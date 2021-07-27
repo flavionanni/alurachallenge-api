@@ -20,8 +20,36 @@ class Video {
 
     };
 
+    list(res) {
+        const sql = "SELECT * FROM Videos";
 
+        conexao.query(sql, (erro, result) => {
+            if(erro) {
+                res.status(400).json(erro);
+
+            } else {
+                res.status(200).json(result);
+
+            }
+
+
+        });
+
+    }
+
+    searchToID(id, res) {
+        const sql = `SELECT * FROM Videos WHERE id=${id}`;
+
+        conexao.query(sql, (erro, result) => {
+            const viewVideo = result[0];
+
+            if(erro) {
+                res.status(400).json(erro);
+            } else {
+                res.status(200).json(viewVideo);
+            }
+        });
+    }
 }
-
 
 module.exports = new Video
