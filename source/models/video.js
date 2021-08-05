@@ -2,7 +2,7 @@ const conexao = require('../database/conexao.js');
 
 class Video {
 
-    adiciona(video,res) {
+    add(video,res) {
 
         const sql = 'INSERT INTO Videos SET ?';
 
@@ -35,7 +35,7 @@ class Video {
 
         });
 
-    }
+    };
 
     searchToID(id, res) {
         const sql = `SELECT * FROM Videos WHERE id=${id}`;
@@ -49,7 +49,36 @@ class Video {
                 res.status(200).json(viewVideo);
             }
         });
+    };
+
+    modify(id, value, res) {
+        const sql = `UPDATE Videos SET ? WHERE id=?`;
+
+        conexao.query(sql, [value, id], (erro, result) => {
+            if(erro) {
+                res.status(400).json(erro);
+            } else {
+                res.status(200).json(value);
+            }
+
+        });
+
+    };
+
+    delete(id, res) {
+        const sql = 'DELETE FROM Videos WHERE id=?';
+    
+        conexao.query(sql,id,(erro, result) => {
+            if(erro) {
+                res.status(400).json(erro);
+                
+            } else {
+                res.status(200).json({id});
+            }
+        })
+
     }
+
 }
 
 module.exports = new Video

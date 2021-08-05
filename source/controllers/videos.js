@@ -17,8 +17,23 @@ module.exports = app => {
     app.post('/videos', (req, res) => {
         const videos = req.body;
 
-        Video.adiciona(videos, res);
+        Video.add(videos, res);
 
+    });
+
+    app.patch('/videos/:id', (req, res) => {
+        const id = parseInt(req.params.id);
+        const value = req.body;
+
+        Video.modify(id, value, res);
+
+    });
+
+    app.delete('/videos/:id', (req, res) => {
+        const id = parseInt(req.params.id);
+        const value = req.body;
+
+        Video.delete(id, res);
     });
 
     // app.post('/videos', (req, res) => {
